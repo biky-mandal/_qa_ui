@@ -1,0 +1,130 @@
+.profile-nav-main {
+    width: 20rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.p-nav-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    height: 4rem;
+    width: 100%;
+    border-bottom: 1px solid #eee;
+}
+
+.head-left {
+    width: calc(100% - 3rem);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.name {
+    font-family: "Nunito Sans", sans-serif;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.email {
+    font-family: "Nunito Sans", sans-serif;
+    font-size: 0.8rem;
+}
+
+.head-right {
+    width: 3rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.profile-setting {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.7rem;
+    height: 2.7rem;
+    outline: none;
+    border: none;
+    border-radius: 50%;
+    color: #796d2a;
+    background-color: transparent;
+    cursor: pointer;
+    transition: all 100ms ease-in-out;
+    border: 1px solid #ccc;
+}
+
+.profile-setting:hover {
+    transform: rotate(30deg);
+}
+
+.p-nav-foot {
+    height: 3rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.p-nav-mid {
+    min-height: 5rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.nav-links {
+    height: 3rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    text-decoration: none;
+    color: rgb(80, 80, 80);
+}
+
+.nav-links:hover .nav-text {
+    border-bottom: 1px dashed #eee;
+}
+
+.nav-icon {
+    width: 2.5rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.nav-text {
+    width: calc(100% - 2.5rem);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: "Nunito Sans", sans-serif;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.logout-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    color: rgb(255, 56, 96);
+}
+
+.logout-btn:hover {
+    color: crimson;
+}

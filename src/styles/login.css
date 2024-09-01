@@ -1,0 +1,32 @@
+.Login-div{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: url('../assets/bg.jpg');
+    background-position: center;
+    background-size: cover;
+}
+.top-login-item{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: auto;
+    gap: 1rem;
+}
+.login-controls{
+    padding: 2rem 0;
+}
+.please-text{
+    font-family: "Nunito Sans", sans-serif;
+    font-size: 1rem;
+}
+.new-user-text{
+    font-family: "Nunito Sans", sans-serif;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #b73434;
+}
