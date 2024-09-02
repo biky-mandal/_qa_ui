@@ -1,11 +1,12 @@
 import * as React from 'react';
 import '../styles/profilenav.css';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 import { server } from '../constants/config';
 import { useDispatch, useSelector } from 'react-redux';
 import { userNotExists } from '../redux/reducers/auth';
 import { message, Tag } from 'antd';
+import coin from '../assets/coin-48.png';
 
 export interface IProfileNav {
 }
@@ -27,7 +28,10 @@ function ProfileNav({ }: IProfileNav) {
         <div className='profile-nav-main'>
             <div className='p-nav-head'>
                 <div className='head-left'>
-                    <span className='name'>{user.name} <Tag color={user.role === 'admin' ? 'cyan' : user.role === 'author' ? 'purple' : 'green'}>{user.role}</Tag></span>
+                    <span className='name'>
+                        {user.name}
+                        <Tag color={user.role === 'admin' ? 'cyan' : user.role === 'author' ? 'purple' : 'green'}>{user.role}</Tag>
+                    </span>
                     <span className='email'>{user.email}</span>
                 </div>
                 <div className='head-right'>
@@ -89,6 +93,8 @@ function ProfileNav({ }: IProfileNav) {
             </div>
 
             <div className='p-nav-foot'>
+                <span className='user-coin'><img src={coin} alt='user coin' /> {user.coins} </span>
+
                 <button className='logout-btn' onClick={logoutHandler}>
                     Log Out
                     <span className="material-symbols-outlined">

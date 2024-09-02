@@ -1,6 +1,6 @@
 import * as React from 'react';
-import '../styles/dashboardlayout.css';
-import Header from "./Header";
+import '../../styles/dashboardlayout.css';
+import Header from "../Header";
 
 interface DasboardLayoutProps {
     children: React.ReactNode;

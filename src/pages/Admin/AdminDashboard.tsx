@@ -2,6 +2,8 @@ import { ConfigProvider, Tabs } from 'antd';
 import type { TabsProps } from 'antd';
 
 import '../../styles/dashboard.css';
+import UserDataGrid from './DataGrids/UserGrid';
+import CategoryDataGrid from './DataGrids/CategoryGrid';
 
 interface IDashboardProps {
 }
@@ -16,7 +18,7 @@ const AdminDashboard = ({ }: IDashboardProps) => {
         {
             key: '1',
             label: 'Users',
-            children: <div></div>,
+            children: <UserDataGrid />,
         },
         {
             key: '2',
@@ -31,7 +33,7 @@ const AdminDashboard = ({ }: IDashboardProps) => {
         {
             key: '4',
             label: 'Categories',
-            children: <div></div>,
+            children: <CategoryDataGrid />,
         },
         {
             key: '5',
