@@ -7,6 +7,7 @@ export const adminApis = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: `${server}`
     }),
+    tagTypes: ['User', 'Category'],
 
     endpoints: (builder) => ({
 
@@ -16,7 +17,8 @@ export const adminApis = createApi({
                 url: '/user/admin/users',
                 method: 'GET',
                 credentials: 'include'
-            })
+            }),
+            providesTags: ['User']
         }),
 
 
@@ -26,10 +28,40 @@ export const adminApis = createApi({
                 url: '/category/admin/categories',
                 method: 'GET',
                 credentials: 'include'
-            })
+            }),
+            providesTags: ['Category']
         }),
+
+        createCategory: builder.mutation({
+            query: (data) => ({
+                url: '/category/admin/create',
+                method: 'POST',
+                body: data,
+                credentials: 'include'
+            }),
+            invalidatesTags: ['Category']
+        }),
+
+        createSubCategory: builder.mutation({
+            query: (data) => ({
+                url: '/subcategory/admin/create',
+                method: 'POST',
+                body: data,
+                credentials: 'include'
+            }),
+            invalidatesTags: ['Category']
+        }),
+
+        deleteCategory: builder.mutation({
+            query: (_id) => ({
+                url: `/category/admin/delete?_id=${_id}`,
+                method: 'DELETE',
+                credentials: 'include'
+            }),
+            invalidatesTags: ['Category']
+        })
 
     })
 })
 
-export const { useFetchUsersQuery, useCategoriesQuery } = adminApis;
+export const { useFetchUsersQuery, useCategoriesQuery, useCreateCategoryMutation, useDeleteCategoryMutation, useCreateSubCategoryMutation } = adminApis;

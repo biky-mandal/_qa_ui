@@ -1,40 +1,11 @@
-import { Table, Tag } from "antd";
+import { Table } from "antd";
 import type { TableColumnsType } from 'antd';
 import { useCategoriesQuery } from "../../../redux/adminApis";
 import { useEffect, useState } from "react";
 import { addKeyToData } from "../../../utils/addKeyToData";
 import '../../../styles/admin/categoryGrid.css';
-
-const catColumns: TableColumnsType<DataType> = [
-    { title: 'Category', dataIndex: 'name', key: 'name' },
-    {
-        title: 'Action',
-        dataIndex: '',
-        key: 'x',
-        render: () => <a>Delete</a>,
-    },
-];
-
-const subCatColumns: TableColumnsType<SubCatDataType> = [
-    {
-        title: 'Sub Category', dataIndex: 'name', key: 'name',
-        onFilter: (value, record) => record.name.startsWith(value as string),
-        filterSearch: true,
-    },
-    {
-        title: 'Category', dataIndex: 'category', key: 'category', render: (category) => {
-            return <div>{category.name}</div>;
-        },
-        onFilter: (value, record) => record.category.startsWith(value as string),
-        filterSearch: true,
-    },
-    {
-        title: 'Action',
-        dataIndex: '',
-        key: 'x',
-        render: () => <a>Delete</a>,
-    },
-];
+import CategoryModel from "../Models/CategoryModel";
+import SubCategoryModel from "../Models/SubCategoryModel";
 
 interface DataType {
     key: React.Key;
@@ -52,9 +23,45 @@ interface ICategoryDatagridProps {
 
 const CategoryDataGrid = ({ }: ICategoryDatagridProps) => {
 
+
     const { data } = useCategoriesQuery('');
     const [catData, setCatData] = useState<DataType[]>();
     const [subCatData, setSubCatData] = useState<SubCatDataType[]>();
+    const [isCatModalOpen, setIsCatModalOpen] = useState(false);
+    const [isSubCatModalOpen, setIsSubCatModalOpen] = useState(false);
+
+
+    const getCategoryFilters = () => {
+        const filters = data?.categories?.map((cat: any) => {
+            return { text: cat?.name, value: cat?.name }
+        })
+        return filters;
+    }
+
+    const catColumns: TableColumnsType<DataType> = [
+        { title: 'Category', dataIndex: 'name', key: 'name' },
+        // {
+        //     title: 'Action',
+        //     dataIndex: '',
+        //     key: 'x',
+        //     render: (data: any) => <button onClick={() => deleteCategory(data)}>Delete</button>,
+        // },
+    ];
+
+    const subCatColumns: TableColumnsType<SubCatDataType> = [
+        {
+            title: 'Sub Category', dataIndex: 'name', key: 'name',
+        },
+        {
+            title: 'Category', dataIndex: 'category', key: 'category', render: (category) => {
+                return <div>{category?.name}</div>;
+            },
+            filters: getCategoryFilters(),
+            onFilter: (value: any, record: any) => record.category.name === value
+
+        },
+    ];
+
 
     useEffect(() => {
         if (data?.success) {
@@ -69,9 +76,11 @@ const CategoryDataGrid = ({ }: ICategoryDatagridProps) => {
         <div className="contribution-div">
 
             <div className="admin-cat-top-controls">
-                <button className="add-btn">Add Sub Category</button>
-                <button className="add-btn">Add Category</button>
+                <button className="add-btn" onClick={() => setIsSubCatModalOpen(true)}>Add Sub Category</button>
+                <button className="add-btn" onClick={() => setIsCatModalOpen(true)}>Add Category</button>
             </div>
+            <CategoryModel isModalOpen={isCatModalOpen} setIsModalOpen={setIsCatModalOpen} />
+            <SubCategoryModel categories={catData} isModalOpen={isSubCatModalOpen} setIsModalOpen={setIsSubCatModalOpen} />
             <Table
                 columns={catColumns}
                 dataSource={catData}
