@@ -1,41 +1,41 @@
 import * as React from 'react';
 import { Form, Input, message, Modal, Select, Tag } from 'antd';
 import { useScreenDetector } from '../../../hooks/useScreenDetector';
-import { useCreateSubCategoryMutation } from '../../../redux/adminApis';
+import { useCreateCountryMutation, useCreateStateMutation } from '../../../redux/adminApis';
 import { useEffect, useState } from 'react';
 
 const { TextArea } = Input;
 
-interface ISubCategoryModel {
-    isModalOpen: boolean;
+interface IStateModel {
+    isModalOpen: boolean
     setIsModalOpen: any;
-    categories: any;
+    countries: any;
 }
 
-const SubCategoryModel = ({ isModalOpen, setIsModalOpen, categories }: ISubCategoryModel) => {
+const StateModel = ({ isModalOpen, setIsModalOpen, countries }: IStateModel) => {
 
     const [form] = Form.useForm();
     const { isMobile, isTablet, isDesktop } = useScreenDetector();
-    const [newSubCategory] = useCreateSubCategoryMutation();
-    const [categoriesData, setCategoriesData] = useState<any>([]);
+    const [countriesData, setCountriesData] = useState<any>([]);
+    const [newState] = useCreateStateMutation()
 
     useEffect(() => {
-        const tempCategories: any = [];
-        categories && categories.map((cat: any) => {
-            const obj: any = { value: cat._id, label: cat.name };
-            tempCategories.push(obj);
+        const tempCountries: any = [];
+        countries && countries.map((count: any) => {
+            const obj: any = { value: count._id, label: count.name };
+            tempCountries.push(obj);
         })
 
-        setCategoriesData(tempCategories);
-    }, [categories])
+        setCountriesData(tempCountries);
+    }, [countries])
 
     const handleOk = async () => {
         if (await form.validateFields()) {
-            const _subcategory = form.getFieldsValue();
-
-            await newSubCategory(_subcategory).then(({ data }) => {
-                if (data?.success) message.success(data?.message) || 'Sub Category Added Successfully';
-                else message.error(data?.message) || 'Failed to Add Category';
+            const _state = form.getFieldsValue();
+            console.log(_state);
+            await newState(_state).then(({ data }) => {
+                if (data?.success) message.success(data?.message) || 'State Added Successfully';
+                else message.error(data?.message) || 'Failed to Add State';
                 setIsModalOpen(false);
                 form.resetFields();
             })
@@ -53,7 +53,6 @@ const SubCategoryModel = ({ isModalOpen, setIsModalOpen, categories }: ISubCateg
         </>
     );
 
-
     return (
         <Modal className="q-model" height='auto' title="Question Details" width={isMobile ? '90%' : isTablet ? '60%' : isDesktop ? '40%' : '50%'} open={isModalOpen} okText="Save" onOk={handleOk} onCancel={handleCancel}>
             <div className='category-controls'>
@@ -66,7 +65,7 @@ const SubCategoryModel = ({ isModalOpen, setIsModalOpen, categories }: ISubCateg
                     requiredMark={customizeRequiredMark}
                 >
                     <Form.Item
-                        label="Sub Category"
+                        label="State"
                         name="name"
                         rules={[
                             {
@@ -75,12 +74,25 @@ const SubCategoryModel = ({ isModalOpen, setIsModalOpen, categories }: ISubCateg
                             },
                         ]}
                     >
-                        <TextArea placeholder="Enter Sub Category Here" />
+                        <TextArea placeholder="Enter State Name Here" />
                     </Form.Item>
 
                     <Form.Item
-                        label="Category"
-                        name="category"
+                        label="State Code"
+                        name="code"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Required!',
+                            },
+                        ]}
+                    >
+                        <Input placeholder="Enter code Here" />
+                    </Form.Item>
+
+                    <Form.Item
+                        label="Country"
+                        name="country"
                         rules={[
                             {
                                 required: true,
@@ -91,7 +103,7 @@ const SubCategoryModel = ({ isModalOpen, setIsModalOpen, categories }: ISubCateg
                         <Select
                             placeholder="Outlined"
                             style={{ flex: 1 }}
-                            options={categoriesData}
+                            options={countriesData}
                         />
                     </Form.Item>
 
@@ -101,4 +113,4 @@ const SubCategoryModel = ({ isModalOpen, setIsModalOpen, categories }: ISubCateg
     )
 }
 
-export default SubCategoryModel;
+export default StateModel;

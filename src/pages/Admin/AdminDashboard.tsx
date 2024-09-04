@@ -4,6 +4,7 @@ import type { TabsProps } from 'antd';
 import '../../styles/dashboard.css';
 import UserDataGrid from './DataGrids/UserGrid';
 import CategoryDataGrid from './DataGrids/CategoryGrid';
+import CountryDataGrid from './DataGrids/CountryGrid';
 
 interface IDashboardProps {
 }
@@ -38,7 +39,7 @@ const AdminDashboard = ({ }: IDashboardProps) => {
         {
             key: '5',
             label: 'Countries',
-            children: <div></div>,
+            children: <CountryDataGrid />,
         },
         {
             key: '6',

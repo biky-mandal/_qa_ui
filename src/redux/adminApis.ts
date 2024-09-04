@@ -7,7 +7,7 @@ export const adminApis = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: `${server}`
     }),
-    tagTypes: ['User', 'Category'],
+    tagTypes: ['User', 'Category', 'Country'],
 
     endpoints: (builder) => ({
 
@@ -59,9 +59,47 @@ export const adminApis = createApi({
                 credentials: 'include'
             }),
             invalidatesTags: ['Category']
-        })
+        }),
 
+        // Country
+        countries: builder.query({
+            query: () => ({
+                url: '/country/admin/countries',
+                method: 'GET',
+                credentials: 'include'
+            }),
+            providesTags: ['Country']
+        }),
+
+        createCountry: builder.mutation({
+            query: (data) => ({
+                url: '/country/admin/add',
+                method: 'POST',
+                body: data,
+                credentials: 'include'
+            }),
+            invalidatesTags: ['Country']
+        }),
+
+        createState: builder.mutation({
+            query: (data) => ({
+                url: '/state/admin/add',
+                method: 'POST',
+                body: data,
+                credentials: 'include'
+            }),
+            invalidatesTags: ['Country']
+        }),
     })
 })
 
-export const { useFetchUsersQuery, useCategoriesQuery, useCreateCategoryMutation, useDeleteCategoryMutation, useCreateSubCategoryMutation } = adminApis;
+export const {
+    useFetchUsersQuery,
+    useCategoriesQuery,
+    useCreateCategoryMutation,
+    useDeleteCategoryMutation,
+    useCreateSubCategoryMutation,
+    useCountriesQuery,
+    useCreateCountryMutation,
+    useCreateStateMutation
+} = adminApis;

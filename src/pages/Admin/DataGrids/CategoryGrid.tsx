@@ -23,7 +23,6 @@ interface ICategoryDatagridProps {
 
 const CategoryDataGrid = ({ }: ICategoryDatagridProps) => {
 
-
     const { data } = useCategoriesQuery('');
     const [catData, setCatData] = useState<DataType[]>();
     const [subCatData, setSubCatData] = useState<SubCatDataType[]>();
@@ -40,12 +39,6 @@ const CategoryDataGrid = ({ }: ICategoryDatagridProps) => {
 
     const catColumns: TableColumnsType<DataType> = [
         { title: 'Category', dataIndex: 'name', key: 'name' },
-        // {
-        //     title: 'Action',
-        //     dataIndex: '',
-        //     key: 'x',
-        //     render: (data: any) => <button onClick={() => deleteCategory(data)}>Delete</button>,
-        // },
     ];
 
     const subCatColumns: TableColumnsType<SubCatDataType> = [
@@ -79,8 +72,10 @@ const CategoryDataGrid = ({ }: ICategoryDatagridProps) => {
                 <button className="add-btn" onClick={() => setIsSubCatModalOpen(true)}>Add Sub Category</button>
                 <button className="add-btn" onClick={() => setIsCatModalOpen(true)}>Add Category</button>
             </div>
+
             <CategoryModel isModalOpen={isCatModalOpen} setIsModalOpen={setIsCatModalOpen} />
             <SubCategoryModel categories={catData} isModalOpen={isSubCatModalOpen} setIsModalOpen={setIsSubCatModalOpen} />
+
             <Table
                 columns={catColumns}
                 dataSource={catData}
