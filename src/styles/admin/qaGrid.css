@@ -1,0 +1,42 @@
+.table-data{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+.option-div{
+    min-height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 2rem;
+}
+.option{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    font-family: "Poppins", system-ui;
+}
+.ans-key{
+    width: 2rem;
+    height: 2rem;
+    border: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Poppins", system-ui;
+    font-weight: 500;
+    border-radius: 5px;
+}
+.a-ans{
+    border: none;
+    background-color: #95fa95;
+    color: #008600;
+}
+.description{
+    padding: 10px 0;
+    color: #5e5e5e;
+    font-family: "Nunito Sans", sans-serif;
+}

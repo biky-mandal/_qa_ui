@@ -5,6 +5,7 @@ import '../../styles/dashboard.css';
 import UserDataGrid from './DataGrids/UserGrid';
 import CategoryDataGrid from './DataGrids/CategoryGrid';
 import CountryDataGrid from './DataGrids/CountryGrid';
+import QaDataGrid from './DataGrids/QADatagrid';
 
 interface IDashboardProps {
 }
@@ -24,13 +25,13 @@ const AdminDashboard = ({ }: IDashboardProps) => {
         {
             key: '2',
             label: 'Active Q&A',
-            children: <div></div>,
+            children: <QaDataGrid />,
         },
-        {
-            key: '3',
-            label: 'Pending Q&A',
-            children: <div></div>,
-        },
+        // {
+        //     key: '3',
+        //     label: 'Pending Q&A',
+        //     children: <QaDataGrid />,
+        // },
         {
             key: '4',
             label: 'Categories',

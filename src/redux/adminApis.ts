@@ -7,7 +7,7 @@ export const adminApis = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: `${server}`
     }),
-    tagTypes: ['User', 'Category', 'Country'],
+    tagTypes: ['User', 'Category', 'Country', 'Q&A'],
 
     endpoints: (builder) => ({
 
@@ -90,6 +90,26 @@ export const adminApis = createApi({
             }),
             invalidatesTags: ['Country']
         }),
+
+        // Questions
+        createQuestionAnswer: builder.mutation({
+            query: (data) => ({
+                url: '/question/create',
+                method: 'POST',
+                body: data,
+                credentials: 'include'
+            }),
+            invalidatesTags: ['Q&A']
+        }),
+
+        questionAnswers: builder.query({
+            query: () => ({
+                url: '/question/fetchAllWithAns',
+                method: 'GET',
+                credentials: 'include'
+            }),
+            providesTags: ['Q&A']
+        }),
     })
 })
 
@@ -101,5 +121,7 @@ export const {
     useCreateSubCategoryMutation,
     useCountriesQuery,
     useCreateCountryMutation,
-    useCreateStateMutation
+    useCreateStateMutation,
+    useCreateQuestionAnswerMutation,
+    useQuestionAnswersQuery
 } = adminApis;
