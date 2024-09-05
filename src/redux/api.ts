@@ -1,42 +1,33 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { IUserLogin, IUserRegister } from '../interface/IUser';
 
 export const apis = createApi({
     reducerPath: 'api',
     baseQuery: fetchBaseQuery({
         baseUrl: 'http://localhost:4000/api/v1'
     }),
+    tagTypes: ['Q&A'],
     endpoints: (builder) => ({
-        me: builder.query<any, string>({
-            query: () => ({
-                url: '/user/me',
-                credentials: 'include'
-            })
-        }),
-        register: builder.mutation<any, IUserRegister>({
-            query: (userData) => ({
-                url: '/user/register',
+        // Questions
+        createQAByUser: builder.mutation({
+            query: (data) => ({
+                url: '/question/create',
                 method: 'POST',
-                body: userData,
+                body: data,
                 credentials: 'include'
-            })
+            }),
+            invalidatesTags: ['Q&A']
         }),
-        login: builder.mutation<any, IUserLogin>({
-            query: (userData) => ({
-                url: '/user/login',
-                method: 'POST',
-                body: userData,
+
+        questionAnswersByUser: builder.query({
+            query: (_id) => ({
+                url: `/question/fetchQA?createdBy=${_id}`,
+                method: 'GET',
                 credentials: 'include'
-            })
-        }),
-        logout: builder.query<any, string>({
-            query: () => ({
-                url: '/user/logout',
-                credentials: 'include'
-            })
+            }),
+            providesTags: ['Q&A']
         }),
     })
 })
 
 // Exporting hook
-export const { useMeQuery, useLogoutQuery, useRegisterMutation, useLoginMutation } = apis; 
+export const { useCreateQAByUserMutation, useQuestionAnswersByUserQuery } = apis; 

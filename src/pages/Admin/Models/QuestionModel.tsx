@@ -6,6 +6,7 @@ import { useCategoriesQuery, useCountriesQuery, useCreateQuestionAnswerMutation 
 import { useEffect, useState } from 'react';
 import moment from 'moment';
 import { useSelector } from 'react-redux';
+import { useCreateQAByUserMutation } from '../../../redux/api';
 
 
 const { TextArea } = Input;
@@ -17,12 +18,13 @@ interface IQuestion {
 
 const QuestionModel = ({ isModalOpen, setIsModalOpen }: IQuestion) => {
 
-    const { auth } = useSelector((state: any) => state.auth);
+    const { user } = useSelector((state: any) => state.auth);
     const [form] = Form.useForm();
     const { isMobile, isTablet, isDesktop } = useScreenDetector();
     const { data: categoryData } = useCategoriesQuery('');
     const { data: countryData } = useCountriesQuery('');
-    const [createQuestion] = useCreateQuestionAnswerMutation();
+    const [createQuestionByAdmin] = useCreateQuestionAnswerMutation();
+    const [createQuestionByUser] = useCreateQAByUserMutation();
 
     const [countries, setCountries] = useState<any>([]);
     const [selectedCountry, setSelectedCountry] = useState<any>([]);
@@ -108,18 +110,27 @@ const QuestionModel = ({ isModalOpen, setIsModalOpen }: IQuestion) => {
                 countries: form.getFieldValue('countries'),
                 states: form.getFieldValue('states'),
                 categories: form.getFieldValue('categories'),
-                subCategories: form.getFieldValue('subCategories'),
-                createdBy: auth?.user._id,
-                updatedBy: auth?.user._id,
+                subCategories: form.getFieldValue('subcategories'),
+                createdBy: user._id,
+                updatedBy: user._id,
                 key: form.getFieldValue('answer'),
                 description: form.getFieldValue('description'),
             }
 
-            await createQuestion(_q).then(({ data }) => {
-                data.success ? message.success(data.message) : message.error(data.message);
-                setIsModalOpen(false);
-                form.resetFields();
-            })
+            if (user.role === 'admin') {
+                await createQuestionByAdmin(_q).then(({ data }) => {
+                    data.success ? message.success(data.message) : message.error(data.message);
+                    setIsModalOpen(false);
+                    form.resetFields();
+                })
+            } else {
+                await createQuestionByUser(_q).then(({ data }) => {
+                    data.success ? message.success(data.message) : message.error(data.message);
+                    setIsModalOpen(false);
+                    form.resetFields();
+                })
+            }
+
         }
     };
 

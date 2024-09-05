@@ -1,8 +1,8 @@
 import QaTable from "../../../components/QATable";
 import '../../../styles/contributionDashboard.css';
 import coin from '../../../assets/coin-48.png'
-import QuestionModel from "../../../components/QuestionModel";
 import { useState } from "react";
+import QuestionModel from "../../Admin/Models/QuestionModel";
 
 interface IContributionDashboardProps {
 }

@@ -11,7 +11,7 @@ const columns: TableColumnsType<DataType> = [
     {
         title: 'Role', dataIndex: 'role', key: 'role', render: (role: string) => {
             return (
-                <Tag color='green' key={role}>
+                <Tag color={role === 'admin' ? 'green' : 'cyan'} key={role}>
                     {role.toUpperCase()}
                 </Tag >
             );
@@ -20,18 +20,12 @@ const columns: TableColumnsType<DataType> = [
     {
         title: 'Coins', dataIndex: 'coins', key: 'coins', width: '15%', render: (coins) => {
             return (
-                <div style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                     <img src={coin} alt='coin' width={20} height={20} /> {coins}
                 </div>
             );
         }
-    },
-    {
-        title: 'Action',
-        dataIndex: '',
-        key: 'x',
-        render: () => <a>Delete</a>,
-    },
+    }
 ];
 
 interface DataType {

@@ -25,7 +25,7 @@ export const adminApis = createApi({
         // Categories
         categories: builder.query({
             query: () => ({
-                url: '/category/admin/categories',
+                url: '/category/categories',
                 method: 'GET',
                 credentials: 'include'
             }),
@@ -64,7 +64,7 @@ export const adminApis = createApi({
         // Country
         countries: builder.query({
             query: () => ({
-                url: '/country/admin/countries',
+                url: '/country/countries',
                 method: 'GET',
                 credentials: 'include'
             }),

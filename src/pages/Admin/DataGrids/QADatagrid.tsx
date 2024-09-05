@@ -70,8 +70,6 @@ const QaDataGrid = ({ }: IQaDataGridProps) => {
     const { data: qa } = useQuestionAnswersQuery('')
     const [data, setData] = useState<any>([]); ([]);
 
-    console.log(qa);
-
     useEffect(() => {
         if (qa?.success) {
             const temp: any = addKeyToData(qa?.questions)
