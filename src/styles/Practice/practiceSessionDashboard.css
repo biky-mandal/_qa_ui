@@ -1,0 +1,51 @@
+.practice-session{
+    width: 100%;
+    min-height: calc(100vh - 10rem);
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.session-div{
+    display: flex;
+    width: 100%;
+    gap: 1rem;
+    min-height: 10rem;
+}
+.session-card{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 50%;
+    height: 5rem;
+    border-radius: 12px;
+    border: 1px solid #eee;
+    padding: 0 1rem;
+}
+.session-card-left{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.card-mid{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.card-title{
+    font-family: "Nunito Sans", sans-serif;
+    font-size: 1rem;
+    font-weight: bolder;
+    color: #016d8b;
+}
+.card-p{
+    font-family: "Nunito Sans", sans-serif;
+    font-size: 0.8rem;
+    color: #016d8b;
+}
+
+.card-right{
+    display: flex;
+    align-items: flex-end;
+    gap: 2rem;
+}

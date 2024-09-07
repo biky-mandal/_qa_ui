@@ -2,8 +2,7 @@ import { ConfigProvider, Tabs } from 'antd';
 import type { TabsProps } from 'antd';
 
 import '../../styles/dashboard.css';
-import PracticeSessionDashboard from '../Dashboard/Practice/PracticeSessionDashboard';
-import LiveSessionDashboard from '../Dashboard/Live/LiveSessionDashboard';
+import PracticeSessionDashboard from './Session/sessionDashboard';
 import ContributionDashboard from '../Dashboard/Contribution/ContributionDashboard';
 
 interface IDashboardProps {
@@ -18,13 +17,8 @@ const Dashboard = ({ }: IDashboardProps) => {
     const items: TabsProps['items'] = [
         {
             key: '1',
-            label: 'Practice Session',
+            label: 'Session',
             children: <PracticeSessionDashboard />,
-        },
-        {
-            key: '2',
-            label: 'Live Session',
-            children: <LiveSessionDashboard />,
         },
         {
             key: '3',

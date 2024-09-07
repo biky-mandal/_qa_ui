@@ -1,0 +1,16 @@
+.session-main {
+    display: flex;
+    width: 100%;
+    height: calc(100vh - 5rem);
+    padding: 1rem 3rem;
+}
+.left-session {
+    width: 65%;
+    height: 100%;
+    overflow-y: scroll;
+}
+
+.right-session {
+    width: 35%;
+    border-left: 1px solid #eee;
+}

@@ -1,4 +1,3 @@
-import * as React from 'react';
 import '../styles/button.css';
 
 interface ButtonProps {

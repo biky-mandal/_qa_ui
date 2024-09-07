@@ -10,6 +10,7 @@ import axios from "axios";
 import { server } from './constants/config';
 import { useDispatch, useSelector } from 'react-redux';
 import { userNotExists, userExists } from './redux/reducers/auth'
+import PracticeSession from './pages/Sessions/PracticeSession';
 
 const Home = lazy(() => import("./pages/Home"))
 const Dashboard = lazy(() => import("./pages/Dashboard/Dashboard"))
@@ -47,6 +48,15 @@ const App = () => {
             <ProtectedRoute user={user} isAdmin={isAdmin}>
               <DashboardLayout user={user}>
                 <Dashboard />
+              </DashboardLayout>
+            </ProtectedRoute>
+          } />
+
+        <Route path="/session/practice"
+          element={
+            <ProtectedRoute user={user} isAdmin={isAdmin}>
+              <DashboardLayout user={user}>
+                <PracticeSession />
               </DashboardLayout>
             </ProtectedRoute>
           } />
